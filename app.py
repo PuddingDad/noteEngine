@@ -119,29 +119,29 @@ if check_password("recorder"):
     with st.expander("Note recorder"):
     
         ## Inputs
-        title = st.text_input('Title', 'Default')
-        group = st.selectbox('Group',('Math', 'Music', 'Movie', 'Miscellaneous'))
-        subgroup = st.text_input('Subgroup', '')
-        feature = st.multiselect('feature',
+        st.session_state['title'] = st.text_input('Title', 'Default')
+        st.session_state['group'] = st.selectbox('Group',('Math', 'Music', 'Movie', 'Miscellaneous'))
+        st.session_state['subgroup'] = st.text_input('Subgroup', '')
+        st.session_state['feature'] = st.multiselect('feature',
                              ['Theory', 'Application', 'Proof', 'Algorithm', 'Solving', 
                               'Knowledge', 'Interesting', 'Writers', 'RocknRoll', 'Chinese', 
                               'A-level', 'OpenMind', 'Linkage', 'abstract', 'technique'])
-        content = st.text_area("Content",'',height=30)
-        comment = st.text_input('Comment', '')
-        author = st.text_input('Author', '')
+        st.session_state['content'] = st.text_area("Content",'',height=30)
+        st.session_state['comment'] = st.text_input('Comment', '')
+        st.session_state['author'] = st.text_input('Author', '')
         ## Inputs
     
         ## commit
         if st.button('submit'):
             writer = ix.writer()
-            writer.add_document(title=title,
+            writer.add_document(title=st.session_state['title'],
                             path = str(uuid.uuid1()),
-                            group=group, 
-                            subgroup = subgroup,
-                            feature = feature,
-                            content = content,
-                            comment = comment,
-                            author = author)
+                            group=st.session_state['group'], 
+                            subgroup = st.session_state['subgroup'],
+                            feature = st.session_state['feature'],
+                            content = st.session_state['content'],
+                            comment = st.session_state['comment'],
+                            author = st.session_state['author'])
             writer.commit()
             st.write("Notes submitted!")
             st.markdown(content,unsafe_allow_html=True)
