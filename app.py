@@ -144,9 +144,9 @@ if check_password("recorder"):
                             author = st.session_state['author'])
             writer.commit()
             st.write("Notes submitted!")
-            st.markdown(content,unsafe_allow_html=True)
+            st.markdown(st.session_state['content'],unsafe_allow_html=True)
         else:
-            st.markdown(content,unsafe_allow_html=True)
+            st.markdown(st.session_state['content'],unsafe_allow_html=True)
     ## commit
         
 
