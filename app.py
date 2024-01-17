@@ -18,7 +18,7 @@ with st.expander("Note searcher", expanded=True):
     
     with ix.searcher() as s:
             docnums = s.document_numbers()
-            keywords = [keyword for keyword, score in s.key_terms(docnums, "subgroup")]
+            keywords = [keyword for keyword, score in s.key_terms(docnums, "subgroup",numterms = 50)]
             st.write("Keywords for subgroup")
             st.text(keywords)
     
